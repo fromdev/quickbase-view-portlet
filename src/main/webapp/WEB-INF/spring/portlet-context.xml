@@ -41,7 +41,8 @@
 		<beans:property name="password" value="${quickbase.password}" />
 		<beans:property name="appToken" value="${quickbase.apptoken}" />
 		<beans:property name="dbId" value="${quickbase.dbid}" />
-		<beans:property name="query" value="${quickbase.query}" />		
+		<beans:property name="query" value="${quickbase.query}" />	
+		<beans:property name="url" value="${quickbase.url}" />		
 	</beans:bean>
  
 </beans:beans>

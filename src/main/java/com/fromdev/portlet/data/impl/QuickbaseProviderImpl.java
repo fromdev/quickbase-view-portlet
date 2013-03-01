@@ -41,7 +41,7 @@ public class QuickbaseProviderImpl implements Provider {
 		try {
 
 			QuickBaseClient client = new QuickBaseClient(getUserName(),
-					getPassword(), true, getAppToken());
+					getPassword(), getUrl(), getAppToken());
 
 			resultSet = client.doQuery(getDbId(), getQuery(), "", "", "");
 			if (resultSet != null) {
@@ -56,6 +56,8 @@ public class QuickbaseProviderImpl implements Provider {
 		logger.info("Finished getTableData QuickbaseProviderImpl.");
 		return tableData;
 	}
+
+
 
 	/**
 	 * Construct data rows list
@@ -135,6 +137,7 @@ public class QuickbaseProviderImpl implements Provider {
 	private String appToken;
 	private String dbId;
 	private String query;
+	private String url;
 
 	public String getUserName() {
 		return userName;
@@ -174,18 +177,14 @@ public class QuickbaseProviderImpl implements Provider {
 
 	public void setQuery(String query) {
 		this.query = query;
+	}		
+
+	public String getUrl() {
+		return url;
 	}
 
-	public static void main1(String[] args) {
-		QuickbaseProviderImpl p = new QuickbaseProviderImpl();
-		p.setUserName("sachin_joshi@playstation.sony.com");
-		p.setPassword("test1234");
-		p.setAppToken("ctpabe599vxwwchw6hmt78zijx");
-		p.setDbId("bhff5i74r");
-		p.setQuery("{375.EX.'11'}");
-		Map data = p.getTableData();
-		System.out.println(data);
-
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }
