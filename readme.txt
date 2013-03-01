@@ -5,4 +5,9 @@ mvn clean install
 
 - You need to manually install quickbase jar file into your maven repository using this command
 
+On Windows:
 mvn install:install-file -Dfile=%PROJECT_HOME%\src\main\webapp\WEB-INF\lib\quickbase.jar -DgroupId=com.quickbase -DartifactId=quickbase -Dversion=1.0 -Dpackaging=jar
+
+On Mac/Linux:
+mvn install:install-file -Dfile=$PROJECT_HOME/src/main/webapp/WEB-INF/lib/quickbase.jar -DgroupId=com.quickbase -DartifactId=quickbase -Dversion=1.0 -Dpackaging=jar
+
