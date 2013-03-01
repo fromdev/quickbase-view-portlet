@@ -11,3 +11,8 @@ mvn install:install-file -Dfile=%PROJECT_HOME%\src\main\webapp\WEB-INF\lib\quick
 On Mac/Linux:
 mvn install:install-file -Dfile=$PROJECT_HOME/src/main/webapp/WEB-INF/lib/quickbase.jar -DgroupId=com.quickbase -DartifactId=quickbase -Dversion=1.0 -Dpackaging=jar
 
+- Run following command to setup eclipse
+
+mvn eclipse:eclipse
+
+- Set M2_REPO env variable in eclipse Preferences -> Build Path -> Classpath Variable
