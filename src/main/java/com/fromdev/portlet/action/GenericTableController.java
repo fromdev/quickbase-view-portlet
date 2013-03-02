@@ -1,14 +1,20 @@
 package com.fromdev.portlet.action;
 
+import java.io.IOException;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletPreferences;
+import javax.portlet.ReadOnlyException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ValidatorException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.portlet.bind.annotation.ActionMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
@@ -18,17 +24,30 @@ import com.fromdev.portlet.data.Provider;
 
 /**
  * Portlet implementation class GenericTableController
+ * 
  * @author sjoshi
  */
 
 @Controller(value = "genericTableController")
-@RequestMapping(value = "VIEW")
 public class GenericTableController {
+
+	private static final String QUICKBASE_URL = "quickbaseUrl";
+
+	private static final String QUICKBASE_QUERY = "quickbaseQuery";
+
+	private static final String QUICKBASE_DB_ID = "quickbaseDbId";
+
+	private static final String QUICKBASE_APP_TOKEN = "quickbaseAppToken";
+
+	private static final String QUICKBASE_PASSWORD = "quickbasePassword";
+
+	private static final String QUICKBASE_USERNAME = "quickbaseUsername";
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(GenericTableController.class);
 
 	public static final String VIEW = "view";
+	public static final String CONFIG = "config";
 	@Autowired
 	private Provider provider;
 
@@ -39,11 +58,11 @@ public class GenericTableController {
 	/**
 	 * Render method called for view mode
 	 */
+	@RequestMapping(value = "VIEW")
 	@RenderMapping
-	public ModelAndView doView_Render_Database(RenderRequest rRequest,
-			RenderResponse rResponse) {
+	public ModelAndView doView(RenderRequest rRequest, RenderResponse rResponse) {
 
-		logger.info("*****Entering doView_Render in GenericTableController*****");
+		logger.info("*****Entering doView in GenericTableController*****");
 
 		ModelAndView modelView = new ModelAndView();
 
@@ -57,12 +76,79 @@ public class GenericTableController {
 	}
 
 	/**
-	 * Action method called for view mode
+	 * Render method called for edit mode is for config
 	 */
-	@ActionMapping
-	public void doView_Action(ActionRequest aRequest, ActionResponse aResponse) {
+	@RequestMapping(value = "EDIT")
+	@RenderMapping
+	public ModelAndView doConfig(RenderRequest rRequest,
+			RenderResponse rResponse) {
 
-		logger.info("*****Entering doView_Action*****");
+		logger.info("*****Entering doConfig in GenericTableController*****");
+
+		ModelAndView modelView = new ModelAndView();
+
+		modelView.setViewName(CONFIG);
+
+		return modelView;
+	}
+
+	/**
+	 * Action method called for saving edit mode config
+	 */
+	@RequestMapping(value = "EDIT")
+	@ActionMapping(value = "saveConfig")
+	public void saveConfig(ActionRequest aRequest, ActionResponse aResponse) {
+
+		logger.info("*****Entering saveConfig in GenericTableController*****");
+		String quickbaseUsername = aRequest.getParameter(QUICKBASE_USERNAME); // "quickbase.user@example.com";
+		String quickbasePassword = aRequest.getParameter(QUICKBASE_PASSWORD);// password-for-above-quickbase-user";
+		String quickbaseAppToken = aRequest.getParameter(QUICKBASE_APP_TOKEN); // "get-app-token-from-quickbase";
+		String quickbaseDbId = aRequest.getParameter(QUICKBASE_DB_ID); // "get-dbid-from-quickbase";
+		String quickbaseQuery = aRequest.getParameter(QUICKBASE_QUERY); // "{17.EX.'TEST'}";
+		String quickbaseUrl = aRequest.getParameter(QUICKBASE_URL); // "https://www.quickbase.com/db/";
+
+		PortletPreferences preferences = aRequest.getPreferences();
+		try {
+			if (StringUtils.hasText(quickbaseUsername)) {
+				preferences.setValue(QUICKBASE_USERNAME, quickbaseUsername);
+			}
+			if (StringUtils.hasText(quickbasePassword)) {
+				preferences.setValue(QUICKBASE_PASSWORD, quickbasePassword);
+			}
+			if (StringUtils.hasText(quickbaseAppToken)) {
+				preferences.setValue(QUICKBASE_APP_TOKEN, quickbaseAppToken);
+			}
+			if (StringUtils.hasText(quickbaseDbId)) {
+				preferences.setValue(QUICKBASE_DB_ID, quickbaseDbId);
+			}
+			if (StringUtils.hasText(quickbaseQuery)) {
+				preferences.setValue(QUICKBASE_QUERY, quickbaseQuery);
+			}
+			if (StringUtils.hasText(quickbaseUrl)) {
+				preferences.setValue(QUICKBASE_URL, quickbaseUrl);
+			}
+			preferences.store();
+		} catch (ReadOnlyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ValidatorException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * Action method called for saving edit mode config
+	 */
+	@RequestMapping(value = "EDIT")
+	@ActionMapping(value = "resetConfig")
+	public void resetConfig(ActionRequest aRequest, ActionResponse aResponse) {
+
+		logger.info("*****Entering resetConfig in GenericTableController*****");
 
 	}
 
