@@ -17,5 +17,6 @@ public interface Provider {
 	public static final String COLUMN_NAMES_LIST = "columnList";
 
 	public Map<String, List> getTableData();
+	public void setConfig(Map config);
 
 }

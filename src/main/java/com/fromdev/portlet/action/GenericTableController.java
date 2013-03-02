@@ -31,19 +31,19 @@ import com.fromdev.portlet.data.Provider;
 @Controller(value = "genericTableController")
 public class GenericTableController {
 
-	private static final String QUICKBASE_URL = "quickbaseUrl";
+	public static final String QUICKBASE_URL = "quickbaseUrl";
 
-	private static final String QUICKBASE_QUERY = "quickbaseQuery";
+	public static final String QUICKBASE_QUERY = "quickbaseQuery";
 
-	private static final String QUICKBASE_DB_ID = "quickbaseDbId";
+	public static final String QUICKBASE_DB_ID = "quickbaseDbId";
 
-	private static final String QUICKBASE_APP_TOKEN = "quickbaseAppToken";
+	public static final String QUICKBASE_APP_TOKEN = "quickbaseAppToken";
 
-	private static final String QUICKBASE_PASSWORD = "quickbasePassword";
+	public static final String QUICKBASE_PASSWORD = "quickbasePassword";
 
-	private static final String QUICKBASE_USERNAME = "quickbaseUsername";
+	public static final String QUICKBASE_USERNAME = "quickbaseUsername";
 
-	private static final Logger logger = LoggerFactory
+	public static final Logger logger = LoggerFactory
 			.getLogger(GenericTableController.class);
 
 	public static final String VIEW = "view";
@@ -65,8 +65,12 @@ public class GenericTableController {
 		logger.info("*****Entering doView in GenericTableController*****");
 
 		ModelAndView modelView = new ModelAndView();
-
+		
 		if (provider != null) {
+			/*
+			 * Override the default quickbase config settings.
+			 */
+			provider.setConfig(rRequest.getPreferences().getMap());
 			modelView.addObject("data", provider.getTableData());
 		}
 

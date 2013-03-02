@@ -12,12 +12,14 @@
 <liferay-ui:success key="config-data-saved-successfully"
 	message="config-data-saved-successfully" />
 <%
-String quickbaseUsername = "quickbase.user@example.com";
-String quickbasePassword = "password-for-above-quickbase-user";
-String quickbaseAppToken = "get-app-token-from-quickbase";
-String quickbaseDbId = "get-dbid-from-quickbase";
-String quickbaseQuery = "{17.EX.'TEST'}";
-String quickbaseUrl = "https://www.quickbase.com/db/";
+PortletPreferences preferences = renderRequest.getPreferences();
+
+String quickbaseUsername = preferences.getValue(GenericTableController.QUICKBASE_USERNAME, "quickbase.user@example.com"); // "quickbase.user@example.com";
+String quickbasePassword = preferences.getValue(GenericTableController.QUICKBASE_PASSWORD, "password-for-above-quickbase-user");// password-for-above-quickbase-user";
+String quickbaseAppToken = preferences.getValue(GenericTableController.QUICKBASE_APP_TOKEN, "get-app-token-from-quickbase"); // "get-app-token-from-quickbase";
+String quickbaseDbId = preferences.getValue(GenericTableController.QUICKBASE_DB_ID, "get-dbid-from-quickbase"); // "get-dbid-from-quickbase";
+String quickbaseQuery = preferences.getValue(GenericTableController.QUICKBASE_QUERY, "{1.EX.'TEST'}"); // "{17.EX.'TEST'}";
+String quickbaseUrl = preferences.getValue(GenericTableController.QUICKBASE_URL, "https://www.quickbase.com/db/"); // "https://www.quickbase.com/db/";
 %>
 	<aui:form name="configForm"
 		action="<%=saveConfigURL.toString()%>" method="post">

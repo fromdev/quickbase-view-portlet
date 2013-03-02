@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.fromdev.portlet.action.GenericTableController;
 import com.fromdev.portlet.data.Provider;
 import com.intuit.quickbase.util.QuickBaseClient;
 
@@ -138,6 +139,7 @@ public class QuickbaseProviderImpl implements Provider {
 	private String dbId;
 	private String query;
 	private String url;
+	private Map config;
 
 	public String getUserName() {
 		return userName;
@@ -185,6 +187,22 @@ public class QuickbaseProviderImpl implements Provider {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+
+
+	@Override
+	public void setConfig(Map config) {
+		if(config!= null) {
+			this.config = config;
+			this.setUrl(((String[])config.get(GenericTableController.QUICKBASE_URL))[0]);
+			this.setQuery(((String[])config.get(GenericTableController.QUICKBASE_QUERY))[0]);
+			this.setAppToken(((String[])config.get(GenericTableController.QUICKBASE_APP_TOKEN))[0]);
+			this.setDbId(((String[])config.get(GenericTableController.QUICKBASE_DB_ID))[0]);
+			this.setUserName(((String[])config.get(GenericTableController.QUICKBASE_USERNAME))[0]);
+			this.setPassword(((String[])config.get(GenericTableController.QUICKBASE_PASSWORD))[0]);
+		}
+		
 	}
 
 }

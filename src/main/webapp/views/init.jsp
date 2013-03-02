@@ -39,6 +39,8 @@
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
 
 <%@ page import ="org.springframework.util.StringUtils" %>
+
+<%@ page import="com.fromdev.portlet.action.GenericTableController" %>
 <%@ taglib prefix="portlet" uri="http://java.sun.com/portlet_2_0"%>
 
 

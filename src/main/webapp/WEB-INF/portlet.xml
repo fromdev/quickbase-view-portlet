@@ -22,6 +22,32 @@
 			<short-title>Quickbase Table View</short-title>
 			<keywords>Quickbase,Table,View, Portlet, Integration, Read</keywords>
 		</portlet-info>
+		<portlet-preferences>
+	         <preference>
+	            <name>quickbaseUrl</name>
+	               <value>https://www.quickbase.com/db/</value>
+	         </preference>
+	         <preference>
+	            <name>quickbaseQuery</name>
+	            <value>query-for-filtering-data</value>
+	         </preference>
+	         <preference>
+	            <name>quickbaseDbId</name>
+	            <value>get-dbid-from-quickbase</value>
+	         </preference>
+	         <preference>
+	            <name>quickbaseAppToken</name>
+	            <value>get-app-token-from-quickbase</value>
+	         </preference>
+	         <preference>
+	            <name>quickbasePassword</name>
+	            <value>password-for-above-quickbase-user</value>
+	         </preference>
+	         <preference>
+	            <name>quickbaseUsername</name>
+	            <value>quickbase.user@example.com</value>
+	         </preference>
+	   </portlet-preferences>
 		<security-role-ref>
 			<role-name>administrator</role-name>
 		</security-role-ref>
@@ -34,5 +60,7 @@
 		<security-role-ref>
 			<role-name>user</role-name>
 		</security-role-ref>
+		
 	</portlet>
+	
 </portlet-app>
