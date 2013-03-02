@@ -25,7 +25,7 @@ String quickbaseUrl = preferences.getValue(GenericTableController.QUICKBASE_URL,
 		action="<%=saveConfigURL.toString()%>" method="post">
 		<aui:fieldset label="Quickbase Configuration">
 		<aui:input class="lfr-input-text-container"  name="quickbaseUsername" type="text" value="<%= quickbaseUsername %>" />
-		<aui:input class="lfr-input-text-container"  name="quickbasePassword" type="text" value="<%= quickbasePassword %>" />
+		<aui:input class="lfr-input-text-container"  name="quickbasePassword" type="password" value="<%= quickbasePassword %>" />
 		<aui:input class="lfr-input-text-container"  name="quickbaseAppToken" type="text" value="<%= quickbaseAppToken %>" />
 		<aui:input class="lfr-input-text-container"  name="quickbaseDbId" type="text" value="<%= quickbaseDbId %>" />
 		<aui:input class="lfr-input-text-container"  name="quickbaseQuery" type="text" value="<%= quickbaseQuery %>" />
