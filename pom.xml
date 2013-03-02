@@ -170,6 +170,12 @@
 			<artifactId>commons-logging</artifactId>
 			<version>1.1.1</version>
 		</dependency>
+<!--	<dependency>
+			<groupId>com.liferay.portal</groupId>
+			<artifactId>portal-service</artifactId>
+			<version>6.0.6</version>
+			<scope>provided</scope>
+		</dependency>		       -->     
 	</dependencies>
 	<build>
 		<plugins>
@@ -211,4 +217,11 @@
 			</plugin>
 		</plugins>
 	</build>
+	<repositories>
+        <repository>
+            <id>liferay-repository</id>
+            <name>Liferay's Maven repository</name>
+            <url>http://oss.sonatype.org/content/groups/public</url>
+        </repository>
+    </repositories>
 </project>
