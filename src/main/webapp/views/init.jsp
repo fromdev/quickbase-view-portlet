@@ -37,6 +37,9 @@
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchContainer"%>
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchEntry"%>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
+<%@ page import="com.liferay.portal.kernel.servlet.SessionErrors" %>
+<%@ page import="com.liferay.portal.kernel.servlet.SessionMessages" %>
+
 
 <%@ page import ="org.springframework.util.StringUtils" %>
 

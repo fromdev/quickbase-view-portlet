@@ -7,18 +7,16 @@
     	tableData = new HashMap();
     }
 %>
-
-
+<%@ include file="error.jsp"%>
 <h3>Quickbase Table View</h3>
 
-<liferay-ui:search-container emptyResultsMessage="No data to display"
+<liferay-ui:search-container  emptyResultsMessage="No data to display"
 	delta="10">
 
 	<liferay-ui:search-container-results>
 		<%
-			List<Object[]> rows = (List<Object[]>) tableData
-							.get(com.fromdev.portlet.data.Provider.ROW_DATA_LIST);
-
+		List<Object[]> rows = (List<Object[]>) tableData
+		.get(com.fromdev.portlet.data.Provider.ROW_DATA_LIST);
 					if (rows == null) {
 						rows = new ArrayList<Object[]>();
 					}
@@ -31,7 +29,6 @@
 					pageContext.setAttribute("total", total);
 		%>
 	</liferay-ui:search-container-results>
-
 	<liferay-ui:search-container-row className="java.lang.Object[]"
 		modelVar="rows">
 		<%

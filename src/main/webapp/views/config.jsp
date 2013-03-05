@@ -7,10 +7,13 @@
 	<liferay-portlet:param name="url_param" value="reset"></liferay-portlet:param>
 </liferay-portlet:actionURL>
 
-<liferay-ui:success key="config-data-reset-successfully"
-	message="config-data-reset-successfully" />
-<liferay-ui:success key="config-data-saved-successfully"
-	message="config-data-saved-successfully" />
+<liferay-ui:success key="success"
+	message="Config Data Saved Successfully" />
+	
+<%String msg = (String)SessionErrors.get(renderRequest,com.fromdev.portlet.action.GenericTableController.ERROR); %>
+<liferay-ui:error key="error" message="Some error saving data" />
+<liferay-ui:error key="quickbase-username-is-required" message="Quickbase Username is required" />
+		
 <%
 PortletPreferences preferences = renderRequest.getPreferences();
 
@@ -24,18 +27,16 @@ String quickbaseUrl = preferences.getValue(GenericTableController.QUICKBASE_URL,
 	<aui:form name="configForm"
 		action="<%=saveConfigURL.toString()%>" method="post">
 		<aui:fieldset label="Quickbase Configuration">
-		<aui:input class="lfr-input-text-container"  name="quickbaseUsername" type="text" value="<%= quickbaseUsername %>" />
-		<aui:input class="lfr-input-text-container"  name="quickbasePassword" type="password" value="<%= quickbasePassword %>" />
-		<aui:input class="lfr-input-text-container"  name="quickbaseAppToken" type="text" value="<%= quickbaseAppToken %>" />
-		<aui:input class="lfr-input-text-container"  name="quickbaseDbId" type="text" value="<%= quickbaseDbId %>" />
-		<aui:input class="lfr-input-text-container"  name="quickbaseQuery" type="text" value="<%= quickbaseQuery %>" />
-		<aui:input class="lfr-input-text-container"  name="quickbaseUrl" type="text" value="<%= quickbaseUrl %>" />
+		<aui:input class="lfr-input-text-container"  label="Username" name="quickbaseUsername" type="text" value="<%= quickbaseUsername %>" />
+		<aui:input class="lfr-input-text-container"  label="Password" name="quickbasePassword" type="password" value="<%= quickbasePassword %>" />
+		<aui:input class="lfr-input-text-container"  label="App Token" name="quickbaseAppToken" type="text" value="<%= quickbaseAppToken %>" />
+		<aui:input class="lfr-input-text-container"  label="DB Id" name="quickbaseDbId" type="text" value="<%= quickbaseDbId %>" />
+		<aui:input class="lfr-input-text-container"  label="Query" name="quickbaseQuery" type="text" value="<%= quickbaseQuery %>" />
+		<aui:input class="lfr-input-text-container"  label="URL" name="quickbaseUrl" type="text" value="<%= quickbaseUrl %>" />
 		
 			<aui:button-row>
 				<aui:button name="<portlet:namespace />saveButton" type="submit"
 					value="Save" />
-				<aui:button name="<portlet:namespace />resetButton" type="button"
-					value="Reset" onClick="<%=resetConfigURL.toString()%>" />
 			</aui:button-row>
 		</aui:fieldset>
 	</aui:form>

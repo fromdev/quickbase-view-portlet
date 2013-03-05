@@ -53,6 +53,7 @@ public class QuickbaseProviderImpl implements Provider {
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error("Error loading data from quickabse", e);
+			throw new RuntimeException(e);
 		}
 		logger.info("Finished getTableData QuickbaseProviderImpl.");
 		return tableData;

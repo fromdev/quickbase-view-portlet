@@ -12,7 +12,7 @@
 			/js/main.js
 		</footer-portlet-javascript>
 		<css-class-wrapper>
-			generictableportlet-portlet
+			generictableportlet
 		</css-class-wrapper>
 	</portlet>
 	<role-mapper>

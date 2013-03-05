@@ -1,14 +1,10 @@
 package com.fromdev.portlet.action;
 
-import java.io.IOException;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletPreferences;
-import javax.portlet.ReadOnlyException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.portlet.ValidatorException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +17,9 @@ import org.springframework.web.portlet.bind.annotation.RenderMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fromdev.portlet.data.Provider;
+
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 
 /**
  * Portlet implementation class GenericTableController
@@ -48,6 +47,8 @@ public class GenericTableController {
 
 	public static final String VIEW = "view";
 	public static final String CONFIG = "config";
+	public static final String ERROR = "qb.portlet.error";
+	public static final String SUCCESS = "success";
 	@Autowired
 	private Provider provider;
 
@@ -71,7 +72,12 @@ public class GenericTableController {
 			 * Override the default quickbase config settings.
 			 */
 			provider.setConfig(rRequest.getPreferences().getMap());
-			modelView.addObject("data", provider.getTableData());
+			try {
+				modelView.addObject("data", provider.getTableData());
+			}catch(RuntimeException re) {
+				logger.error("Failed to get data from Quickbase", re);
+				SessionErrors.add(rRequest,ERROR, "Failed to get data from Quickbase, Please check your preferences: " + re.getMessage());	
+			}
 		}
 
 		modelView.setViewName(VIEW);
@@ -115,6 +121,8 @@ public class GenericTableController {
 		try {
 			if (StringUtils.hasText(quickbaseUsername)) {
 				preferences.setValue(QUICKBASE_USERNAME, quickbaseUsername);
+			} else {
+				SessionErrors.add(aRequest,"quickbase-username-is-required");	
 			}
 			if (StringUtils.hasText(quickbasePassword)) {
 				preferences.setValue(QUICKBASE_PASSWORD, quickbasePassword);
@@ -132,17 +140,13 @@ public class GenericTableController {
 				preferences.setValue(QUICKBASE_URL, quickbaseUrl);
 			}
 			preferences.store();
-		} catch (ReadOnlyException e) {
-			// TODO Auto-generated catch block
+			if(SessionErrors.isEmpty(aRequest)) {
+				SessionMessages.add(aRequest,SUCCESS);
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (ValidatorException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			SessionErrors.add(aRequest,ERROR, "Error Saving config data: " + e.getMessage());			
 		}
-
 	}
 
 	/**
