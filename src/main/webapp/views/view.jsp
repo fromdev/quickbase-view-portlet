@@ -8,8 +8,6 @@
     }
 %>
 <%@ include file="error.jsp"%>
-<h3>Quickbase Table View</h3>
-
 <liferay-ui:search-container  emptyResultsMessage="No data to display"
 	delta="10">
 
@@ -49,3 +47,4 @@
 
 	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
+<%@ include file="footer.jsp"%>

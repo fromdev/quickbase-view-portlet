@@ -25,27 +25,27 @@
 		<portlet-preferences>
 	         <preference>
 	            <name>quickbaseUrl</name>
-	               <value>https://www.quickbase.com/db/</value>
+	               <value>https://sachinjoshi.quickbase.com/db/</value>
 	         </preference>
 	         <preference>
 	            <name>quickbaseQuery</name>
-	            <value>query-for-filtering-data</value>
+	            <value>{10.EX.'Active'}</value>
 	         </preference>
 	         <preference>
 	            <name>quickbaseDbId</name>
-	            <value>get-dbid-from-quickbase</value>
+	            <value>bhxgeh6f9</value>
 	         </preference>
 	         <preference>
 	            <name>quickbaseAppToken</name>
-	            <value>get-app-token-from-quickbase</value>
+	            <value>j3ezvpbgsqzu27pa8z8bffqhrc</value>
 	         </preference>
 	         <preference>
 	            <name>quickbasePassword</name>
-	            <value>password-for-above-quickbase-user</value>
+	            <value>pass12345678</value>
 	         </preference>
 	         <preference>
 	            <name>quickbaseUsername</name>
-	            <value>quickbase.user@example.com</value>
+	            <value>fromdev.quickbase@gmail.com</value>
 	         </preference>
 	   </portlet-preferences>
 		<security-role-ref>

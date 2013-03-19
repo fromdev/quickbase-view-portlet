@@ -63,7 +63,7 @@ public class GenericTableController {
 	@RenderMapping
 	public ModelAndView doView(RenderRequest rRequest, RenderResponse rResponse) {
 
-		logger.info("*****Entering doView in GenericTableController*****");
+		logger.debug("Entering doView in GenericTableController");
 
 		ModelAndView modelView = new ModelAndView();
 		

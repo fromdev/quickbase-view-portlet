@@ -40,3 +40,4 @@ String quickbaseUrl = preferences.getValue(GenericTableController.QUICKBASE_URL,
 			</aui:button-row>
 		</aui:fieldset>
 	</aui:form>
+<%@ include file="footer.jsp"%>	

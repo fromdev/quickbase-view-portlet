@@ -33,9 +33,9 @@ public class QuickbaseProviderImpl implements Provider {
 	@SuppressWarnings("rawtypes")
 	public Map<String, List> getTableData() {
 
-		logger.info("Start getTableData QuickbaseProviderImpl " + getUserName()
-				+ " " + getAppToken() + " " + getDbId() + " " + getQuery());
-
+		logger.debug("Start getTableData QuickbaseProviderImpl " + getUserName()
+				+ " " + getQuery());
+		validateConfig();
 		Map<String, List> tableData = new HashMap<String, List>();
 		Vector resultSet = null;
 
@@ -51,12 +51,32 @@ public class QuickbaseProviderImpl implements Provider {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			logger.error("Error loading data from quickabse", e);
 			throw new RuntimeException(e);
 		}
-		logger.info("Finished getTableData QuickbaseProviderImpl.");
+		logger.debug("Finished getTableData QuickbaseProviderImpl.");
 		return tableData;
+	}
+
+
+
+	private void validateConfig() {
+		if("quickbase.user@example.com".equalsIgnoreCase(getUserName())) {
+			throw new RuntimeException("Please configure quickbase user name in the portlet preferences.");
+		}
+		if("password-for-above-quickbase-user".equalsIgnoreCase(getPassword())) {
+			throw new RuntimeException("Please configure quickbase password in the portlet preferences.");
+		}
+		if("get-dbid-from-quickbase".equalsIgnoreCase(getDbId())) {
+			throw new RuntimeException("Please configure quickbase DB ID in the portlet preferences.");
+		}
+		if("get-app-token-from-quickbase".equalsIgnoreCase(getAppToken())) {
+			throw new RuntimeException("Please configure quickbase App Token in the portlet preferences.");
+		}
+		if("query-for-filtering-data".equalsIgnoreCase(getQuery())) {
+			throw new RuntimeException("Please configure quickbase data filter query in the portlet preferences.");
+		}		
+
 	}
 
 
